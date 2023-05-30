@@ -1,0 +1,25 @@
+.header {
+  /* max-width: 60rem; */
+  margin: auto;
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+  background-color: black;
+}
+
+.list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.list a {
+  color: #777;
+  text-decoration: underline;
+}
+
+.list a:hover,
+.list a.active {
+  color: white;
+  text-decoration: underline;
+}

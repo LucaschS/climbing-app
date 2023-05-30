@@ -1,0 +1,27 @@
+.footer {
+  height: 200px;
+  background-color: black;
+  margin: auto;
+  display: flex;
+  padding: 2rem;
+  justify-content: flex-end;
+}
+
+.copyright {
+}
+
+.list {
+  gap: 1rem;
+  list-style: none;
+}
+
+.list a {
+  color: #777;
+  text-decoration: underline;
+}
+
+.list a:hover,
+.list a.active {
+  color: white;
+  text-decoration: underline;
+}
