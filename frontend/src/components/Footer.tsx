@@ -11,19 +11,10 @@ const Footer = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/route-list">Route List</Link>
-          </li>
-          <li>
-            <Link to="/cave-list">Cave List</Link>
-          </li>
-          <li>
             <Link to="/gyms">Gyms</Link>
           </li>
           <li>
-            <Link to="/news">News</Link>
-          </li>
-          <li>
-            <Link to="/forum">Forum</Link>
+            <Link to="/auth">Authentication</Link>
           </li>
         </ul>
       </nav>

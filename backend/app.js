@@ -3,6 +3,7 @@ const express = require("express");
 
 const gymsRoutes = require("./routes/gyms");
 const authRoutes = require("./routes/auth");
+const countiesRoutes = require("./routes/countries");
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 
 app.use("/gyms", gymsRoutes);
+
+app.use("/countries", countiesRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.status || 500;

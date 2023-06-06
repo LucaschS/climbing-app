@@ -1,6 +1,13 @@
 const express = require("express");
 
-const { getAll, get, add, replace, remove } = require("../data/gym");
+const {
+  getAll,
+  get,
+  add,
+  replace,
+  remove,
+  getCountryGyms,
+} = require("../data/gym");
 const { checkAuth } = require("../util/auth");
 const {
   isValidText,
@@ -20,10 +27,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:countryId/:id", async (req, res, next) => {
   try {
     const gym = await get(req.params.id);
     res.json({ gym: gym });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/:countryId", async (req, res, next) => {
+  try {
+    const countryGyms = await getCountryGyms(req.params.countryId);
+    res.json({ countryGyms: countryGyms });
   } catch (error) {
     next(error);
   }

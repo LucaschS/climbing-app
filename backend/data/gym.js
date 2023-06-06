@@ -26,6 +26,23 @@ async function get(id) {
   return gym;
 }
 
+async function getCountryGyms(countryId) {
+  const storedData = await readData();
+  if (!storedData.gyms || storedData.gyms.length === 0) {
+    throw new NotFoundError("Could not find any gyms.");
+  }
+
+  const countryGyms = storedData.gyms.filter((ev) => {
+    console.log(countryId, "chujkurwa");
+    return ev.cities[0].toLowerCase() === countryId;
+  });
+  if (!countryGyms) {
+    throw new NotFoundError("Could not find gym for id " + countryId);
+  }
+  console.log(countryGyms, "countryGyms");
+  return countryGyms;
+}
+
 async function add(data) {
   const storedData = await readData();
   storedData.gyms.unshift({ ...data, id: generateId() });
@@ -56,6 +73,7 @@ async function remove(id) {
 
 exports.getAll = getAll;
 exports.get = get;
+exports.getCountryGyms = getCountryGyms;
 exports.add = add;
 exports.replace = replace;
 exports.remove = remove;

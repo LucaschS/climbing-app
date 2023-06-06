@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 
-import { GymsDetailPageRouteData } from "../models/interface-models";
+import { Gym } from "../models/interface-models";
 
-function GymsList({ gyms }: GymsDetailPageRouteData) {
+interface GymListProps {
+  gyms: Gym[];
+}
+
+function GymsList({ gyms }: GymListProps) {
+  console.log(gyms, "gyms");
   return (
     <div>
       <h1>All Events</h1>

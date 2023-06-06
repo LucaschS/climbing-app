@@ -14,11 +14,34 @@ export interface RouteScale {
   yds: string;
 }
 
+export interface CountriesDetailPageRouteData {
+  countries: Country[];
+  countryGyms: Gym[];
+  country: Country;
+  id: string;
+}
+
+export interface Country {
+  id: number;
+  name: string;
+  ["alpha-2"]: string;
+  ["alpha-3"]: string;
+  ["country-code"]: string;
+  ["iso_3166-2"]: string;
+  region: string;
+  ["sub-region"]: string;
+  ["intermediate-region"]: string;
+  ["region-code"]: string;
+  ["sub-region-code"]: string;
+  ["intermediate-region-code"]: string;
+}
+
 export type Method = "put" | "post" | "patch" | "delete";
 
 export interface GymsDetailPageRouteData {
-  gym?: Gym;
-  gyms?: Gym[];
+  gym: Gym;
+  gyms: Gym[];
+  // countryGyms: Gym[];
 }
 
 export interface Gym {

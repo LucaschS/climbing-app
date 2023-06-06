@@ -1,34 +1,32 @@
-import {
-  useRouteLoaderData,
-  json,
-  defer,
-  LoaderFunctionArgs,
-  Await,
-} from "react-router-dom";
+import { useRouteLoaderData, json, LoaderFunctionArgs } from "react-router-dom";
 import GymItem from "../components/GymItem";
-import { Suspense } from "react";
 import { GymsDetailPageRouteData } from "../models/interface-models";
-
-
+import GymMap from "../components/GymMap";
 
 function GymsDetailPage() {
-  const { gym, gyms } = useRouteLoaderData("gyms-detail") as GymsDetailPageRouteData;
+  const icon = "/climbing.png";
+
+  const { gym } = useRouteLoaderData("gyms-detail") as GymsDetailPageRouteData;
+
+  console.log(useRouteLoaderData("gyms-detail"), "kutas");
+
   return (
     <>
-      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
-        <Await resolve={gyms}>
-          {(loadedGyms) => <GymItem gym={loadedGyms} />}
-        </Await>
-      </Suspense>
-      <Await resolve={gym}>{(loadedGym) => <GymItem gym={loadedGym} />}</Await>
+      <GymItem gym={gym} />
+      <GymMap gym={gym} icon={icon} />
     </>
   );
 }
 
 export default GymsDetailPage;
 
-async function loadGym(id: string | undefined): Promise<GymsDetailPageRouteData> {
-  const response = await fetch("http://localhost:8070/gyms/" + id);
+async function loadGym(
+  gymId: string | undefined,
+  countryId: string | undefined
+): Promise<GymsDetailPageRouteData> {
+  const response = await fetch(
+    "http://localhost:8070/gyms/" + countryId + "/" + gymId
+  );
 
   if (!response.ok) {
     throw json(
@@ -43,26 +41,11 @@ async function loadGym(id: string | undefined): Promise<GymsDetailPageRouteData>
   }
 }
 
-async function loadGyms(): Promise<GymsDetailPageRouteData> {
-  const response = await fetch("http://localhost:8070/gyms");
-  if (!response.ok) {
-    throw json(
-      { message: "Could not fetch gyms." },
-      {
-        status: 500,
-      }
-    );
-  } else {
-    const resData = await response.json();
-    return resData.gyms;
-  }
-}
-
 export async function loader({ request, params }: LoaderFunctionArgs) {
-  const id = params.gymId;
-  console.log(params, request, "params");
-  return defer({
-    gym: await loadGym(id),
-    gyms: loadGyms(),
-  });
+  const gymId = params.gymId;
+  const countryId = params.countryId;
+  console.log(params, "chuj");
+  return {
+    gym: await loadGym(gymId, countryId),
+  };
 }

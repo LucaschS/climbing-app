@@ -1,12 +1,13 @@
 import react from "react";
 import { Form } from "react-router-dom";
-import { GymsDetailPageRouteData } from "../models/interface-models";
-import { Method } from "../models/interface-models";
+import { Gym } from "../models/interface-models";
 
+interface GymFormProps {
+  gym?: Gym;
+  method: "put" | "post" | "patch" | "delete";
+}
 
-
-function GymForm({ gym }: GymsDetailPageRouteData, method: Method) {
-  console.log(method, "method");
+function GymForm({ gym, method }: GymFormProps) {
   return (
     <form method={method}>
       <p>

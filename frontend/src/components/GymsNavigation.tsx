@@ -1,13 +1,22 @@
 import { NavLink } from "react-router-dom";
+import { Gym } from "../models/interface-models";
 
-function GymsNavigation() {
+interface GymCountryItemProps {
+  countryGyms: Gym[];
+}
+
+function GymsNavigation({ countryGyms }: GymCountryItemProps) {
   return (
     <header>
       <nav>
         <ul>
-          <li>
-            <NavLink to="/gyms">Gyms</NavLink>
-          </li>
+          {countryGyms.map((countryGym) => (
+            <li key={countryGym.id}>
+              <NavLink to={`/gyms/${countryGym.cities[0]}/${countryGym.id}`}>
+                {countryGym.tags.name} - {countryGym.tags.leisure}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
