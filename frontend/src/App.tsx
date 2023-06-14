@@ -10,10 +10,11 @@ import CountryRootGymsDetailPage, {
 import "./App.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
-import CountriesNavigation from "./components/CountriesNavigation";
 import GymsRootWithoutNav from "./pages/GymsRootWithoutNav";
 import CountryRootGymsDetailWithoutNav from "./pages/CountryRootGymsDetailWithoutNav";
 import GymsDetail, { loader as gymsDetailLoader } from "./pages/GymsDetail";
+import EditGymPage from "./pages/EditGym";
+import { action as manipulateGymAction } from "./components/GymForm";
 
 const router = createBrowserRouter([
   {
@@ -23,12 +24,12 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "/gyms",
+        path: "gyms",
         element: <GymsRootLayout />,
         loader: countryGymsLoader,
       },
       {
-        path: "/gyms",
+        path: "gyms",
         element: <GymsRootWithoutNav />,
         loader: countryGymsLoader,
         children: [
@@ -41,13 +42,22 @@ const router = createBrowserRouter([
           {
             path: ":countryId",
             element: <CountryRootGymsDetailWithoutNav />,
-            loader: countryGymsDetailLoader,
+            // loader: countryGymsDetailLoader,
+            // id: "gyms-edit",
             children: [
               {
                 path: ":gymId",
                 id: "gyms-detail",
                 loader: gymsDetailLoader,
-                element: <GymsDetail />,
+                children: [
+                  { index: true, element: <GymsDetail /> },
+
+                  {
+                    path: "edit",
+                    element: <EditGymPage />,
+                    action: manipulateGymAction,
+                  },
+                ],
               },
             ],
           },

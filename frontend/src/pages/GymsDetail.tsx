@@ -8,8 +8,6 @@ function GymsDetailPage() {
 
   const { gym } = useRouteLoaderData("gyms-detail") as GymsDetailPageRouteData;
 
-  console.log(useRouteLoaderData("gyms-detail"), "kutas");
-
   return (
     <>
       <GymItem gym={gym} />
@@ -44,7 +42,7 @@ async function loadGym(
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const gymId = params.gymId;
   const countryId = params.countryId;
-  console.log(params, "chuj");
+
   return {
     gym: await loadGym(gymId, countryId),
   };

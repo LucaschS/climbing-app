@@ -33,13 +33,12 @@ async function getCountryGyms(countryId) {
   }
 
   const countryGyms = storedData.gyms.filter((ev) => {
-    console.log(countryId, "chujkurwa");
     return ev.cities[0].toLowerCase() === countryId;
   });
   if (!countryGyms) {
     throw new NotFoundError("Could not find gym for id " + countryId);
   }
-  console.log(countryGyms, "countryGyms");
+  // console.log(countryGyms, "countryGyms");
   return countryGyms;
 }
 
@@ -49,7 +48,9 @@ async function add(data) {
   await writeData(storedData);
 }
 
-async function replace(id, data) {
+//tu sie zatrzymałem
+
+async function replace(id, data, countryId) {
   const storedData = await readData();
   if (!storedData.gyms || storedData.gyms.length === 0) {
     throw new NotFoundError("Could not find any gyms.");
@@ -59,8 +60,8 @@ async function replace(id, data) {
   if (index < 0) {
     throw new NotFoundError("Could not find gym for id " + id);
   }
-
-  storedData.gyms[index] = { ...data, id };
+  console.log(data, "data");
+  storedData.gyms[index] = { ...data, id, cities: [countryId] };
 
   await writeData(storedData);
 }

@@ -32506,16 +32506,18 @@
       "cities": ["FRA"]
     },
     {
-      "id": 7890561600,
       "lat": 41.3228244,
       "lon": 19.8297178,
       "tags": {
-        "leisure": "sports_centre",
-        "name": "Rock Tirana Climbing Gym",
-        "sport": "climbing",
-        "website": "http://www.rocktirana.com/"
+        "url": "www.dupa.pl",
+        "name": "dupcia",
+        "phone": "792231933",
+        "addr:city": "Chorzów",
+        "addr:housenumber": "Jubileuszowa",
+        "addr:postcode": "41-506",
+        "addr:street": "Jubileuszowa"
       },
-      "type": "node",
+      "id": 7890561600,
       "cities": ["ALB"]
     },
     {

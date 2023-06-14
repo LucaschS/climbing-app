@@ -15,16 +15,19 @@ import {
 } from "../models/interface-models";
 import GymCountryItem from "../components/GymItem";
 import GymsNavigation from "../components/GymsNavigation";
+import GymMap from "../components/GymMap";
 
 const CountryRootGymsDetailPage = () => {
   const { countryGyms } = useRouteLoaderData(
     "country-root-detail"
   ) as CountriesDetailPageRouteData;
 
-  console.log(useRouteLoaderData("country-root-detail"), "i");
+  const icon = "/climbing.png";
+
   return (
     <>
       <GymsNavigation countryGyms={countryGyms} />
+      <GymMap icon={icon} gyms={countryGyms} />
       <Outlet />
     </>
   );
@@ -51,8 +54,8 @@ async function loadCountryGyms(
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const id = params.countryId;
-  // console.log(params, "id countries detail");
-  return defer({
+
+  return {
     countryGyms: await loadCountryGyms(id),
-  });
+  };
 }

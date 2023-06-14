@@ -15,14 +15,16 @@ export interface RouteScale {
 }
 
 export interface CountriesDetailPageRouteData {
+  country: Country;
   countries: Country[];
   countryGyms: Gym[];
-  country: Country;
+  gyms: Gym[];
+  gym: Gym;
   id: string;
 }
 
 export interface Country {
-  id: number;
+  // id: number;
   name: string;
   ["alpha-2"]: string;
   ["alpha-3"]: string;
@@ -51,7 +53,7 @@ export interface Gym {
   tags: {
     access: string;
     ["addr:city"]: string;
-    ["ddr:housenumber"]: string;
+    ["addr:housenumber"]: string;
     ["addr:postcode"]: string;
     ["addr:street"]: string;
     ["climbing:boulder"]: string;
@@ -59,6 +61,7 @@ export interface Gym {
     ["climbing:sport"]: string;
     ["climbing:toprope"]: string;
     ["climbing:traditional"]: string;
+
     indoor: string;
     leisure: string;
     name: string;

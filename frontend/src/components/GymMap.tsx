@@ -14,7 +14,9 @@ function GymMap({ gym, gyms, icon }: GymMapProps) {
     iconUrl: icon,
     iconSize: [28, 28],
   });
-  // console.log(gym, gyms, "gym, gyms");
+
+  // const gymPosition = gym && [gym.lat, gym.lon];
+  // const gymsPosition = gyms && [gyms[0].lat, gyms[0].lon];
 
   const markers =
     gyms &&
@@ -34,7 +36,7 @@ function GymMap({ gym, gyms, icon }: GymMapProps) {
           width: "60vw",
           height: "50vh",
         }}
-        center={gym ? [gym.lat, gym.lon] : [51.977056, 19.352638]}
+        center={gym ? [gym.lat, gym.lon] : gyms && [gyms[0].lat, gyms[0].lon]} //to zmodyfikować
         zoom={9}
       >
         <TileLayer
