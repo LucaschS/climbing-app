@@ -15,6 +15,7 @@ import CountryRootGymsDetailWithoutNav from "./pages/CountryRootGymsDetailWithou
 import GymsDetail, { loader as gymsDetailLoader } from "./pages/GymsDetail";
 import EditGymPage from "./pages/EditGym";
 import { action as manipulateGymAction } from "./components/GymForm";
+import { action as rateObjectAction } from "./components/StarRating";
 
 const router = createBrowserRouter([
   {
@@ -42,16 +43,18 @@ const router = createBrowserRouter([
           {
             path: ":countryId",
             element: <CountryRootGymsDetailWithoutNav />,
-            // loader: countryGymsDetailLoader,
-            // id: "gyms-edit",
+
             children: [
               {
                 path: ":gymId",
                 id: "gyms-detail",
                 loader: gymsDetailLoader,
                 children: [
-                  { index: true, element: <GymsDetail /> },
-
+                  {
+                    index: true,
+                    element: <GymsDetail />,
+                    action: rateObjectAction,
+                  },
                   {
                     path: "edit",
                     element: <EditGymPage />,

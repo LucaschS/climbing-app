@@ -61,7 +61,6 @@ export interface Gym {
     ["climbing:sport"]: string;
     ["climbing:toprope"]: string;
     ["climbing:traditional"]: string;
-
     indoor: string;
     leisure: string;
     name: string;
@@ -76,4 +75,5 @@ export interface Gym {
   };
   type: string;
   cities: string[];
+  rate: number;
 }

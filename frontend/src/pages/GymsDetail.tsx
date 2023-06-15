@@ -2,15 +2,16 @@ import { useRouteLoaderData, json, LoaderFunctionArgs } from "react-router-dom";
 import GymItem from "../components/GymItem";
 import { GymsDetailPageRouteData } from "../models/interface-models";
 import GymMap from "../components/GymMap";
+import StarRating from "../components/StarRating";
 
 function GymsDetailPage() {
   const icon = "/climbing.png";
 
   const { gym } = useRouteLoaderData("gyms-detail") as GymsDetailPageRouteData;
-
   return (
     <>
       <GymItem gym={gym} />
+      <StarRating rate={gym.rate} />
       <GymMap gym={gym} icon={icon} />
     </>
   );

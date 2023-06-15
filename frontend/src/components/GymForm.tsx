@@ -15,7 +15,6 @@ interface GymFormProps {
 }
 
 function GymForm({ gym, method }: GymFormProps) {
-  // console.log(method, "method");
   const data = useActionData();
 
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ function GymForm({ gym, method }: GymFormProps) {
   function cancelHandler() {
     navigate(".."); //jeden poziom wyżej
   }
-  // console.log(gym, method, " METHOD");
+
   return (
     <Form method={method}>
       <p>
@@ -146,7 +145,6 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const method = request.method;
 
   const data = await request.formData();
-  // console.log(data, "data");
   const gymData = {
     lat: Number(data.get("lat")),
     lon: Number(data.get("lon")),
@@ -167,10 +165,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
   if (method === "PATCH") {
     const gymId = params.gymId;
     const countryId = params.countryId;
-    // console.log(gymId, countryId, "ids");
     url = "http://localhost:8070/gyms/" + countryId + "/" + gymId;
   }
-  //tu sprawdzic
 
   const response = await fetch(url, {
     method: method,
@@ -183,7 +179,6 @@ export async function action({ request, params }: ActionFunctionArgs) {
   if (response.status === 422) {
     return response;
   }
-  // console.log(response, "response");
 
   return redirect("/gyms");
 }
