@@ -4,9 +4,10 @@ button {
   outline: none;
   cursor: pointer;
 }
-.on {
+
+/* .on {
   color: #000;
 }
 .off {
   color: #ccc;
-}
+} */

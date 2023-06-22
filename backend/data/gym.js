@@ -50,7 +50,7 @@ async function add(data) {
 
 //tu sie zatrzymałem
 
-async function replace(id, data, countryId) {
+async function replace(id, countryId, data) {
   const storedData = await readData();
   if (!storedData.gyms || storedData.gyms.length === 0) {
     throw new NotFoundError("Could not find any gyms.");
@@ -60,8 +60,16 @@ async function replace(id, data, countryId) {
   if (index < 0) {
     throw new NotFoundError("Could not find gym for id " + id);
   }
-  console.log(data, "data");
-  storedData.gyms[index] = { ...data, id, cities: [countryId] };
+
+  console.log(storedData.gyms[index], "storedData");
+
+  storedData.gyms[index] = {
+    ...storedData.gyms[index],
+    id,
+    // cities: [countryId],
+    rate: data.rate,
+  };
+  console.log(storedData.gyms[index], "storedData2");
 
   await writeData(storedData);
 }

@@ -3,6 +3,8 @@ import GymItem from "../components/GymItem";
 import { GymsDetailPageRouteData } from "../models/interface-models";
 import GymMap from "../components/GymMap";
 import StarRating from "../components/StarRating";
+import Apex from "../components/Apex";
+import Comment from "../components/Comment";
 
 function GymsDetailPage() {
   const icon = "/climbing.png";
@@ -12,7 +14,9 @@ function GymsDetailPage() {
     <>
       <GymItem gym={gym} />
       <StarRating rate={gym.rate} />
+      <Apex />
       <GymMap gym={gym} icon={icon} />
+      <Comment studentEmail={undefined} onCommentUpdate={undefined}/>
     </>
   );
 }

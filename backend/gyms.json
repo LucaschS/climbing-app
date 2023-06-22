@@ -32518,7 +32518,8 @@
         "addr:street": "Jubileuszowa"
       },
       "id": 7890561600,
-      "cities": ["ALB"]
+      "cities": ["ALB"],
+      "rate": 2
     },
     {
       "id": 7890725994,
@@ -41771,7 +41772,8 @@
         "website": "https://www.instagram.com/climbalbania/"
       },
       "type": "node",
-      "cities": ["ALB"]
+      "cities": ["ALB"],
+      "rate": 5
     },
     {
       "id": 9653705596,
@@ -46451,7 +46453,8 @@
       "lon": 19.4445004,
       "tags": { "leisure": "sports_centre", "sport": "climbing" },
       "type": "node",
-      "cities": ["ALB"]
+      "cities": ["ALB"],
+      "rate": 6
     },
     {
       "id": 10413167425,

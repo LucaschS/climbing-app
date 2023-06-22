@@ -9,6 +9,8 @@ import {
   useNavigation,
   LoaderFunctionArgs,
 } from "react-router-dom";
+import { FcLike } from "react-icons/fc";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 interface rateProps {
   rate: number;
@@ -20,23 +22,32 @@ const StarRating = ({ rate }: rateProps) => {
 
   return (
     <div className={Styles.button}>
+      Rate this gym
       <Form method="patch">
-        {[...Array(5)].map((star, index) => {
+        {[...Array(10)].map((star, index) => {
           index += 1;
           return (
-            <input
+            <button
               id={`${index}`}
               type="submit"
               name={`${index}`}
               key={index}
               value={index}
-              className={index <= (hover || rate) ? Styles.on : Styles.off}
+              // className={
+              //   index <= ((rate && hover) || rate) ? Styles.on : Styles.off
+              // }
               // onChange={(e) => {
               //   // setRating(rating);
               // }}
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(rate)}
-            ></input>
+            >
+              {index <= ((rate && hover) || rate) ? (
+                <FcLike />
+              ) : (
+                <FcLikePlaceholder />
+              )}
+            </button>
           );
         })}
       </Form>
@@ -59,6 +70,11 @@ export async function action({ params, request }: ActionFunctionArgs) {
     Number(data.get("3")),
     Number(data.get("4")),
     Number(data.get("5")),
+    Number(data.get("6")),
+    Number(data.get("7")),
+    Number(data.get("8")),
+    Number(data.get("9")),
+    Number(data.get("10")),
   ];
   const rate = formData.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;

@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:countryId/:id", async (req, res, next) => {
   try {
     const gym = await get(req.params.id);
-    // console.log(gym, "gym");
+
     res.json({ gym: gym });
   } catch (error) {
     next(error);
@@ -85,10 +85,11 @@ router.get("/:countryId", async (req, res, next) => {
 //     next(error);
 //   }
 // });
+
 // req = require, res = response
 router.patch("/:countryId/:id", async (req, res, next) => {
   const data = req.body;
-  console.log(data, "data"); //jzu tu sa stringi
+
   let errors = {};
 
   // if (!isValidText(data.name)) {
@@ -115,8 +116,12 @@ router.patch("/:countryId/:id", async (req, res, next) => {
   }
 
   try {
-    await replace(Number(req.params.id), data, req.params.countryId);
-    console.log(data, "data");
+    await replace(Number(req.params.id), req.params.countryId, data);
+    // console.log(data, "data");
+    // console.log(req, "req");
+    // console.log(res, "res");
+
+    // console.log(next, "next");
     res.json({ message: "Gym updated.", gym: data });
   } catch (error) {
     next(error);

@@ -23,14 +23,14 @@ function CountriesNavigation({ countries }: CountryListProps) {
       // get first letter of name of current element
       let group = value.name[0];
 
-      console.log(group, "group");
+      // console.log(group, "group");
       // if there is no property in accumulator with this letter create it
       if (!accumulator[group])
         accumulator[group] = { group, children: [value] };
       // if there is push current element to children array for that letter
       else accumulator[group].children.push(value);
       // return accumulator
-      console.log(accumulator, "accumulator");
+      // console.log(accumulator, "accumulator");
 
       return accumulator;
     },
@@ -42,8 +42,8 @@ function CountriesNavigation({ countries }: CountryListProps) {
 
   let result = Object.values(groupCountries);
   let dupa = Object.keys(groupCountries);
-  console.log(result);
-  console.log(dupa, "dupa");
+  // console.log(result);
+  // console.log(dupa, "dupa");
 
   return (
     <header>
@@ -60,7 +60,7 @@ function CountriesNavigation({ countries }: CountryListProps) {
                         {y.name}
                       </Link>
                     </li>
-                  ))}{" "}
+                  ))}
                 </ul>
               </li>
             ))}
