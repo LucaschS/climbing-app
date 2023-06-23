@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 // export function getTokenDuration() {
 //   const storedExpirationDate = localStorage.getItem("expiration");
@@ -10,7 +10,6 @@ import { LoaderFunctionArgs, redirect } from "react-router-dom";
 
 export function getAuthToken(): string | null {
   const token = localStorage.getItem("token");
-
   if (!token) {
     return null;
   }
@@ -26,6 +25,7 @@ export function getAuthToken(): string | null {
 
 export function tokenLoader(): string | null {
   const token = getAuthToken();
+
   return token;
 }
 

@@ -8,6 +8,7 @@ interface GymListProps {
 
 function GymsList({ gyms }: GymListProps) {
   console.log(gyms, "gyms");
+
   return (
     <div>
       <h1>All Events</h1>

@@ -1,19 +1,29 @@
 import { Outlet, useSearchParams } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
 import Footer from "../components/Footer";
-import AuthenticationPage from "./Authentication";
+import AuthForm from "../components/AuthForm";
+import Modal from "../components/UI/Modal";
+import { useState } from "react";
 
 const RootLayout = () => {
-  const [searchParams] = useSearchParams();
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const hideModalHandler = () => {
+    setIsModalVisible(false);
+  };
+
+  const showModalhandler = () => {
+    setIsModalVisible(true);
+  };
 
   return (
     <>
-      <MainNavigation />
-      {searchParams.get("mode") === "auth" ||
-      searchParams.get("mode") === "login" ||
-      searchParams.get("mode") === "signup" ? (
-        <AuthenticationPage />
-      ) : null}
+      <MainNavigation onLogin={showModalhandler} />
+      {isModalVisible && (
+        <Modal onClose={hideModalHandler}>
+          <AuthForm onClose={hideModalHandler} />
+        </Modal>
+      )}
       <main>
         <Outlet />
       </main>

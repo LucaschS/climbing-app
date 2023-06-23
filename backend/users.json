@@ -1,3 +1,9 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "luksmagora@gmail.com",
+      "password": "$2a$12$m21HkvcFn1qdUaY13WiTpOPbL0cIxL.lGDsrv1qNf2GMV3qWr9wEy",
+      "id": "49c00f80-55ae-4e69-b401-635fac9bb0e0"
+    }
+  ]
 }

@@ -16,9 +16,7 @@ import GymsDetail, { loader as gymsDetailLoader } from "./pages/GymsDetail";
 import EditGymPage from "./pages/EditGym";
 import { action as manipulateGymAction } from "./components/GymForm";
 import { action as rateObjectAction } from "./components/StarRating";
-import AuthenticationPage, {
-  action as authAction,
-} from "./pages/Authentication";
+import { tokenLoader } from "./util/auth";
 import { action as logoutAction } from "./pages/Logout";
 
 const router = createBrowserRouter([
@@ -26,6 +24,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    id: "root",
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -71,11 +71,6 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "auth",
-        element: <AuthenticationPage />,
-        action: authAction,
-      },
-      {
         path: "logout",
         action: logoutAction,
       },
@@ -84,7 +79,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  
   return <RouterProvider router={router} />;
 }
 
