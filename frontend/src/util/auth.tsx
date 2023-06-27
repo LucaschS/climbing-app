@@ -29,12 +29,12 @@ export function tokenLoader(): string | null {
   return token;
 }
 
-export function checkAuthLoader(): Response | null {
+export function checkAuthLoader(): Response | undefined {
   const token = getAuthToken();
-
+  console.log(token);
   if (!token) {
-    return redirect("/auth");
+    return;
   }
-
-  return null;
+  return;
+  // return token;
 }

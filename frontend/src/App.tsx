@@ -16,7 +16,7 @@ import GymsDetail, { loader as gymsDetailLoader } from "./pages/GymsDetail";
 import EditGymPage from "./pages/EditGym";
 import { action as manipulateGymAction } from "./components/GymForm";
 import { action as rateObjectAction } from "./components/StarRating";
-import { tokenLoader } from "./util/auth";
+import { checkAuthLoader, tokenLoader } from "./util/auth";
 import { action as logoutAction } from "./pages/Logout";
 
 const router = createBrowserRouter([
@@ -47,7 +47,6 @@ const router = createBrowserRouter([
           {
             path: ":countryId",
             element: <CountryRootGymsDetailWithoutNav />,
-
             children: [
               {
                 path: ":gymId",
@@ -57,12 +56,13 @@ const router = createBrowserRouter([
                   {
                     index: true,
                     element: <GymsDetail />,
-                    action: rateObjectAction,
+                    action: rateObjectAction, //to zmienić
                   },
                   {
                     path: "edit",
                     element: <EditGymPage />,
                     action: manipulateGymAction,
+                    // loader: checkAuthLoader,
                   },
                 ],
               },

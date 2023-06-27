@@ -8,6 +8,7 @@ import {
   redirect,
   useNavigation,
   LoaderFunctionArgs,
+  useRouteLoaderData,
 } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
 import { FcLikePlaceholder } from "react-icons/fc";
@@ -20,6 +21,9 @@ const StarRating = ({ rate }: rateProps) => {
   // const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
 
+  const token = useRouteLoaderData("root") as string;
+  console.log(token, "token");
+
   return (
     <div className={Styles.button}>
       Rate this gym
@@ -28,6 +32,7 @@ const StarRating = ({ rate }: rateProps) => {
           index += 1;
           return (
             <button
+              disabled={token === null}
               id={`${index}`}
               type="submit"
               name={`${index}`}

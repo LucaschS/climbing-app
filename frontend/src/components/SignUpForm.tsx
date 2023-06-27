@@ -1,9 +1,4 @@
-import {
-  json,
-  redirect,
-  useNavigation,
-  useSearchParams,
-} from "react-router-dom";
+import { json, useNavigation, useSearchParams } from "react-router-dom";
 import { useRef } from "react";
 
 interface AuthFormProps {
@@ -32,20 +27,12 @@ function AuthForm({ onClose }: AuthFormProps) {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
-    // const mode = searchParams.get("mode") || "login";
 
-    // if (mode !== "login" && mode !== "signup") {
-    //   throw json({ message: "Unsupported mode." }, { status: 422 });
-    // }
-
-    const response = await fetch("http://localhost:8070/login", {
+    const response = await fetch("http://localhost:8070/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
-    // console.log(formData, "formdAta");
-
-    // console.log(response, "response");
 
     if (response.status === 422 || response.status === 401) {
       return response;
@@ -64,7 +51,7 @@ function AuthForm({ onClose }: AuthFormProps) {
 
   return (
     <form onSubmit={submitHandler} method="post">
-      <h1>Log in</h1>
+      <h1>Create a new user</h1>
       <p>
         <label htmlFor="email"></label>
         <input
@@ -86,7 +73,6 @@ function AuthForm({ onClose }: AuthFormProps) {
         ></input>
       </p>
       <div>
-        {/* <button onClick={login}>{isLogin ? "Signup" : "Login"}</button> */}
         <button>{isSubmitting ? "Submitting..." : "Save"}</button>
       </div>
       <div>

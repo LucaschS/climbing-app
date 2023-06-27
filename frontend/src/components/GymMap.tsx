@@ -35,6 +35,7 @@ function GymMap({ gym, gyms, icon }: GymMapProps) {
         style={{
           width: "60vw",
           height: "50vh",
+          zIndex: 1,
         }}
         center={gym ? [gym.lat, gym.lon] : gyms && [gyms[0].lat, gyms[0].lon]} //to zmodyfikować
         zoom={9}

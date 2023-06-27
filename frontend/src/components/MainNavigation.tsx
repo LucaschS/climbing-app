@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Link, useRouteLoaderData } from "react-router-dom";
 import Styles from "./Navbar.module.css";
+import ModalContext from "../store/ModalContext";
 
 interface MainNavigationProps {
   onLogin: () => void;
 }
 
-const MainNavigation = (props: MainNavigationProps) => {
+const MainNavigation = () => {
+  const ctx = useContext(ModalContext);
   const token = useRouteLoaderData("root") as string;
-  const onLoginHandler = () => {
-    props.onLogin();
-  };
 
-  // const onLogoutHandler = () => {
-  //  token.
-  // };
-
+  console.log(token, "token");
   return (
     <header className={Styles.header}>
       <nav>
@@ -28,7 +24,7 @@ const MainNavigation = (props: MainNavigationProps) => {
           </li>
         </ul>
       </nav>
-      {!token && <button onClick={onLoginHandler}>Login</button>}
+      {!token && <button onClick={ctx.showModalHandler}>Login</button>}
       {token && (
         <Form action="/logout" method="post">
           <button>Logout</button>

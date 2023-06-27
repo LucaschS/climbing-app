@@ -1,4 +1,9 @@
-import { useRouteLoaderData, json, LoaderFunctionArgs } from "react-router-dom";
+import {
+  useRouteLoaderData,
+  json,
+  LoaderFunctionArgs,
+  Outlet,
+} from "react-router-dom";
 import GymItem from "../components/GymItem";
 import { GymsDetailPageRouteData } from "../models/interface-models";
 import GymMap from "../components/GymMap";
@@ -8,15 +13,22 @@ import Comment from "../components/Comment";
 
 function GymsDetailPage() {
   const icon = "/climbing.png";
-
   const { gym } = useRouteLoaderData("gyms-detail") as GymsDetailPageRouteData;
+  console.log(gym, "gym");
+  // const token = useRouteLoaderData("root") as string;
+
+  // function onLogin(): void {
+  //   console.log(token,"token");
+  // }
+  // console.log(token, "token");
   return (
     <>
+      <Outlet />
       <GymItem gym={gym} />
       <StarRating rate={gym.rate} />
       <Apex />
-      <GymMap gym={gym} icon={icon} />
-      <Comment studentEmail={undefined} onCommentUpdate={undefined}/>
+      <GymMap gym={gym} icon={icon}  />
+      <Comment gym={gym} />
     </>
   );
 }

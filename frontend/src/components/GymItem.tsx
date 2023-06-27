@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import { Gym } from "../models/interface-models";
 import StarRating from "./StarRating";
 import "leaflet/dist/leaflet.css";
@@ -8,6 +8,8 @@ interface GymCountryItemProps {
 }
 
 function GymItem({ gym }: GymCountryItemProps) {
+  const token = useRouteLoaderData("root") as string;
+  console.log(token);
   // const submit = useSubmit();
   // function startDeleteHandler() {
   //   const proceed = window.confirm("Are you sure?");
@@ -22,9 +24,7 @@ function GymItem({ gym }: GymCountryItemProps) {
       <h1>
         {gym.tags.name} - {gym.tags.leisure} - {gym.rate}
       </h1>
-      <menu>
-        <Link to="edit">Edit</Link>
-      </menu>
+      <menu>{token ? <Link to="edit">Edit</Link> : null}</menu>
     </article>
   );
 }

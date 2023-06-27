@@ -1,27 +1,23 @@
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
 import Footer from "../components/Footer";
 import AuthForm from "../components/AuthForm";
+import SignUpForm from "../components/SignUpForm";
+
 import Modal from "../components/UI/Modal";
-import { useState } from "react";
+import React, { useContext } from "react";
+import ModalContext from "../store/ModalContext";
 
 const RootLayout = () => {
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
-  const hideModalHandler = () => {
-    setIsModalVisible(false);
-  };
-
-  const showModalhandler = () => {
-    setIsModalVisible(true);
-  };
+  const ctx = useContext(ModalContext);
 
   return (
     <>
-      <MainNavigation onLogin={showModalhandler} />
-      {isModalVisible && (
-        <Modal onClose={hideModalHandler}>
-          <AuthForm onClose={hideModalHandler} />
+      <MainNavigation />
+      {ctx.isModalVisible && (
+        <Modal onClose={ctx.hideModalHandler}>
+          <AuthForm onClose={ctx.hideModalHandler} />
+          <SignUpForm onClose={ctx.hideModalHandler} />
         </Modal>
       )}
       <main>
