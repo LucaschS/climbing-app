@@ -75,5 +75,10 @@ export interface Gym {
   };
   type: string;
   cities: string[];
-  rate: number;
+  rate: number[] | undefined;
+  comments: {
+    author: "string";
+    email: "string";
+    comment: "string";
+  }[];
 }

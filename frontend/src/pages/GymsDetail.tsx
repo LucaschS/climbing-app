@@ -9,26 +9,28 @@ import { GymsDetailPageRouteData } from "../models/interface-models";
 import GymMap from "../components/GymMap";
 import StarRating from "../components/StarRating";
 import Apex from "../components/Apex";
-import Comment from "../components/Comment";
+import Comment from "../components/CommentForm";
+import CommentsList from "../components/CommentsList";
 
 function GymsDetailPage() {
   const icon = "/climbing.png";
   const { gym } = useRouteLoaderData("gyms-detail") as GymsDetailPageRouteData;
-  console.log(gym, "gym");
+
   // const token = useRouteLoaderData("root") as string;
 
   // function onLogin(): void {
   //   console.log(token,"token");
   // }
-  // console.log(token, "token");
+ 
   return (
     <>
       <Outlet />
       <GymItem gym={gym} />
-      <StarRating rate={gym.rate} />
-      <Apex />
-      <GymMap gym={gym} icon={icon}  />
+     <StarRating rate={gym.rate} />
+      {/* <Apex /> */}
+      <GymMap gym={gym} icon={icon} />
       <Comment gym={gym} />
+      <CommentsList gym={gym} />
     </>
   );
 }

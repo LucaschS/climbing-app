@@ -9,7 +9,7 @@ interface GymCountryItemProps {
 
 function GymItem({ gym }: GymCountryItemProps) {
   const token = useRouteLoaderData("root") as string;
-  console.log(token);
+
   // const submit = useSubmit();
   // function startDeleteHandler() {
   //   const proceed = window.confirm("Are you sure?");
@@ -22,7 +22,7 @@ function GymItem({ gym }: GymCountryItemProps) {
   return (
     <article>
       <h1>
-        {gym.tags.name} - {gym.tags.leisure} - {gym.rate}
+        {gym.tags.name} - {gym.tags.leisure}
       </h1>
       <menu>{token ? <Link to="edit">Edit</Link> : null}</menu>
     </article>

@@ -12,17 +12,29 @@ import {
 } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
 import { FcLikePlaceholder } from "react-icons/fc";
+import { getAuthToken } from "../util/auth";
 
 interface rateProps {
-  rate: number;
+  rate: number[] | undefined;
 }
 
 const StarRating = ({ rate }: rateProps) => {
   // const [rating, setRating] = useState<number>(0);
-  const [hover, setHover] = useState<number>(0);
 
+  const [hover, setHover] = useState<number>(0);
   const token = useRouteLoaderData("root") as string;
-  console.log(token, "token");
+
+  let averageRate = 0;
+
+  if (rate) {
+    const reducedRate = rate.reduce((total, value) => {
+      return total + value;
+    });
+
+    averageRate = +Math.round(reducedRate / rate.length);
+  }
+
+  console.log(averageRate, "averageRate");
 
   return (
     <div className={Styles.button}>
@@ -45,9 +57,9 @@ const StarRating = ({ rate }: rateProps) => {
               //   // setRating(rating);
               // }}
               onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rate)}
+              onMouseLeave={() => setHover(averageRate)}
             >
-              {index <= ((rate && hover) || rate) ? (
+              {index <= ((averageRate && hover) || averageRate) ? (
                 <FcLike />
               ) : (
                 <FcLikePlaceholder />
@@ -84,7 +96,8 @@ export async function action({ params, request }: ActionFunctionArgs) {
   const rate = formData.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;
   });
-  console.log(rate, "total");
+
+  const token = getAuthToken();
 
   const response = await fetch(url, {
     method: "PATCH",

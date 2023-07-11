@@ -1,4 +1,4 @@
-import { json, useNavigation, useSearchParams } from "react-router-dom";
+import { json, useNavigation } from "react-router-dom";
 import { useRef } from "react";
 
 interface AuthFormProps {
@@ -8,9 +8,6 @@ interface AuthFormProps {
 function AuthForm({ onClose }: AuthFormProps) {
   const emailRef = useRef<HTMLInputElement>(null!);
   const passwordRef = useRef<HTMLInputElement>(null!);
-
-  const [searchParams] = useSearchParams();
-  const isLogin = searchParams.get("mode") === "login";
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
@@ -23,6 +20,7 @@ function AuthForm({ onClose }: AuthFormProps) {
     event: React.FormEvent<HTMLFormElement>
   ) {
     event.preventDefault();
+    
     const formData = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
@@ -73,7 +71,7 @@ function AuthForm({ onClose }: AuthFormProps) {
         ></input>
       </p>
       <div>
-        <button>{isSubmitting ? "Submitting..." : "Save"}</button>
+        <button>{isSubmitting ? "Submitting..." : "Sign Up"}</button>
       </div>
       <div>
         <button onClick={onCloseHandler}>Cancel</button>

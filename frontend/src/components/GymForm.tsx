@@ -142,6 +142,7 @@ export default GymForm;
 
 export async function action({ request, params }: ActionFunctionArgs) {
   console.log(params, request, "params");
+
   const method = request.method;
 
   const data = await request.formData();
@@ -167,7 +168,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     const countryId = params.countryId;
     url = "http://localhost:8070/gyms/" + countryId + "/" + gymId;
   }
-
+  // console.log(gymData, "gymData");
   const response = await fetch(url, {
     method: method,
     headers: {

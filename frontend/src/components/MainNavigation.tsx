@@ -3,15 +3,10 @@ import { Form, Link, useRouteLoaderData } from "react-router-dom";
 import Styles from "./Navbar.module.css";
 import ModalContext from "../store/ModalContext";
 
-interface MainNavigationProps {
-  onLogin: () => void;
-}
-
 const MainNavigation = () => {
   const ctx = useContext(ModalContext);
   const token = useRouteLoaderData("root") as string;
 
-  console.log(token, "token");
   return (
     <header className={Styles.header}>
       <nav>

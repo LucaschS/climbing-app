@@ -21,7 +21,6 @@ const CommentAddForm = ({ gym }: CommentProps) => {
   const token = useRouteLoaderData("root") as string;
 
   // const token = useLoaderData();
-  console.log(token, "token");
 
   const authorRef = useRef<HTMLInputElement>(null!);
   const commentRef = useRef<HTMLTextAreaElement>(null!);
@@ -31,7 +30,6 @@ const CommentAddForm = ({ gym }: CommentProps) => {
     date: "",
     comment: "",
   });
-  console.log(commentState, "commentState");
 
   const onValueChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.stopPropagation();
@@ -63,19 +61,18 @@ const CommentAddForm = ({ gym }: CommentProps) => {
     // const data = await request.formData();
 
     const formData = {
-      author: commentState.author,
-      comment: commentState.comment,
+      author: authorRef.current.value,
+      comment: commentRef.current.value,
       date: commentState.date,
     };
-
-    console.log(formData, "formData");
 
     const response = await fetch(url, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
       },
-      body: JSON.stringify({ comment: formData }),
+      body: JSON.stringify({ comments: formData }),
     });
 
     if (response.status === 422) {
@@ -89,39 +86,41 @@ const CommentAddForm = ({ gym }: CommentProps) => {
   const handleClick = () => {
     if (!token) {
       ctx.showModalHandler();
+    } else {
+      //tutaj dać przypadek, gdzie bedzie sprawadzanie czy login dodal komentarz
     }
-    return;
   };
 
   return (
-    <form className="form" onSubmit={submitHandler}>
-      <label htmlFor="author" className="form__label">
-        Author :
-      </label>
-      <input
-        ref={authorRef}
-        id="author"
-        type="text"
-        className="form__input"
-        placeholder="author"
-        name="author"
-        maxLength={35}
-        onChange={onValueChange}
-        onClick={handleClick}
-      />
-      <div className="form__label"> Comment:</div>
-      <textarea
-        ref={commentRef}
-        id="comment"
-        className="form__input"
-        placeholder="comment"
-        name="comment"
-        maxLength={1200}
-        onChange={onTextAreaChange}
-        onClick={handleClick}
-      />
+    <>
+      <form className="form" onSubmit={submitHandler}>
+        <label htmlFor="author" className="form__label">
+          Author :
+        </label>
+        <input
+          ref={authorRef}
+          id="author"
+          type="text"
+          className="form__input"
+          placeholder="author"
+          name="author"
+          maxLength={35}
+          onChange={onValueChange}
+          onClick={handleClick}
+        />
+        <div className="form__label"> Comment:</div>
+        <textarea
+          ref={commentRef}
+          id="comment"
+          className="form__input"
+          placeholder="comment"
+          name="comment"
+          maxLength={1200}
+          onChange={onTextAreaChange}
+          onClick={handleClick}
+        />
 
-      {/* <input
+        {/* <input
         ref={commentRef}
         type="text"
         className="form__counter "
@@ -129,10 +128,11 @@ const CommentAddForm = ({ gym }: CommentProps) => {
         onChange={onValueChange}
       /> */}
 
-      <button type="submit" className="form__button">
-        Save
-      </button>
-    </form>
+        <button type="submit" className="form__button">
+          Add comment
+        </button>
+      </form>
+    </>
   );
 };
 

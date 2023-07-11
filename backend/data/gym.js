@@ -1,7 +1,7 @@
 const { v4: generateId } = require("uuid");
 
 const { NotFoundError } = require("../util/errors");
-const { readData, writeData } = require("./util");
+const { readData, writeData, readUsersData } = require("./util");
 
 async function getAll() {
   const storedData = await readData();
@@ -38,7 +38,7 @@ async function getCountryGyms(countryId) {
   if (!countryGyms) {
     throw new NotFoundError("Could not find gym for id " + countryId);
   }
-  // console.log(countryGyms, "countryGyms");
+
   return countryGyms;
 }
 
@@ -52,6 +52,10 @@ async function add(data) {
 
 async function replace(id, countryId, data) {
   const storedData = await readData();
+
+  //wychodzi na to ze nawet jesli nie uzywam countryId to i tak musze go wpisac,.
+  // const storedUserData = await readUsersData();
+
   if (!storedData.gyms || storedData.gyms.length === 0) {
     throw new NotFoundError("Could not find any gyms.");
   }
@@ -61,15 +65,41 @@ async function replace(id, countryId, data) {
     throw new NotFoundError("Could not find gym for id " + id);
   }
 
-  console.log(storedData.gyms[index], "storedData");
+  if (data.rate) {
+    if (!storedData.gyms[index].rate) {
+      storedData.gyms[index] = {
+        ...storedData.gyms[index],
+        rate: [data.rate],
+      };
+    } else {
+      storedData.gyms[index] = {
+        ...storedData.gyms[index],
+        rate: [...storedData.gyms[index].rate, data.rate],
+      };
+    }
+  }
 
-  storedData.gyms[index] = {
-    ...storedData.gyms[index],
-    id,
-    // cities: [countryId],
-    rate: data.rate,
-  };
-  console.log(storedData.gyms[index], "storedData2");
+  if (data.comments) {
+    if (!storedData.gyms[index].comments) {
+      storedData.gyms[index] = {
+        ...storedData.gyms[index],
+        comments: [data.comments],
+      };
+    } else {
+      storedData.gyms[index] = {
+        ...storedData.gyms[index],
+        comments: [...storedData.gyms[index].comments, data.comments],
+      };
+    }
+  }
+
+  if (data && !data.comments && !data.rate) {
+    storedData.gyms[index] = {
+      ...storedData.gyms[index],
+      ...data,
+      id,
+    };
+  }
 
   await writeData(storedData);
 }

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
 import Footer from "../components/Footer";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/LogInForm";
 import SignUpForm from "../components/SignUpForm";
 
 import Modal from "../components/UI/Modal";

@@ -4,6 +4,36 @@
       "email": "luksmagora@gmail.com",
       "password": "$2a$12$m21HkvcFn1qdUaY13WiTpOPbL0cIxL.lGDsrv1qNf2GMV3qWr9wEy",
       "id": "49c00f80-55ae-4e69-b401-635fac9bb0e0"
+    },
+    {
+      "email": "wiesiek@tlen.pl",
+      "password": "$2a$12$4jiualHysN/xwyF/tP5zz.vgg7AsiXEW/dUhwVPL7YySj1Iur9t2W",
+      "id": "3467daf4-a345-46bf-8770-614f447784f9"
+    },
+    {
+      "email": "wiesiek2@tlen.pl",
+      "password": "$2a$12$1IUI1gA6vUGOSQyryg14b.AMZkLwneD4XRZvz97hlyTAp6mBX9E6G",
+      "id": "eb7d803f-ec3c-46f7-bef7-00fc3b0240d5"
+    },
+    {
+      "email": "wiesiek@gmail.com",
+      "password": "$2a$12$TuaQwDgZNATVAFveFXyzl.zyQnUUtPExXubdGxC0RaOxCkWxXlVG.",
+      "id": "79bd779c-d250-41da-8dc9-3f78f1cdbc19"
+    },
+    {
+      "email": "Dupa123@tlen.pl",
+      "password": "$2a$12$8akSPCwli9Jhv7KqWTPnOeeQWeNQTm7Ml0gCMK7CYdqwybQR1zx9a",
+      "id": "a831ff09-264e-46c1-b6a7-ac42cc8001bb"
+    },
+    {
+      "email": "wiesiek`2`12@tlen.pl",
+      "password": "$2a$12$FBP7Z0fqCUUljyODWauNc.NCueMEFQRQrHnEPsCOzRc/9Ow/.cIqm",
+      "id": "5d70390a-9306-44aa-89eb-c28a69b86408"
+    },
+    {
+      "email": "plastikman@tlen.pl",
+      "password": "$2a$12$YQihy4BKRHrSOou6rm1P5uScmm4gAdw2zedWqj6OaQgHTnJdTbwrq",
+      "id": "697848c0-965c-42ea-b4c5-62c4706334a7"
     }
   ]
 }
