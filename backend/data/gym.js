@@ -33,7 +33,7 @@ async function getCountryGyms(countryId) {
   }
 
   const countryGyms = storedData.gyms.filter((ev) => {
-    return ev.cities[0].toLowerCase() === countryId;
+    return ev.country[0].toLowerCase() === countryId;
   });
   if (!countryGyms) {
     throw new NotFoundError("Could not find gym for id " + countryId);

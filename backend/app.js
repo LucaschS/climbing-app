@@ -2,6 +2,9 @@ const bodyParser = require("body-parser");
 const express = require("express");
 
 const gymsRoutes = require("./routes/gyms");
+const cavesRoutes = require("./routes/caves");
+const routesRoutes = require("./routes/routes");
+
 const authRoutes = require("./routes/auth");
 const countiesRoutes = require("./routes/countries");
 
@@ -18,6 +21,10 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 
 app.use("/gyms", gymsRoutes);
+
+app.use("/caves", cavesRoutes);
+
+app.use("/routes", routesRoutes);
 
 app.use("/countries", countiesRoutes);
 
