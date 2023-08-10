@@ -12,14 +12,14 @@ import {
 import {
   CountriesDetailPageRouteData,
   GymsDetailPageRouteData,
-} from "../models/interface-models";
-import GymCountryItem from "../components/GymItem";
-import GymsNavigation from "../components/GymsNavigation";
-import GymMap from "../components/GymMap";
+} from "../../models/interface-models";
+import GymCountryItem from "../../components/GymItem";
+import GymsNavigation from "../../components/GymsNavigation";
+import MapComponent from "../../components/MapComponent";
 
 const CountryRootGymsDetailPage = () => {
   const { countryGyms } = useRouteLoaderData(
-    "country-root-detail"
+    "country-root-gyms-detail"
   ) as CountriesDetailPageRouteData;
 
   const icon = "/climbing.png";
@@ -27,7 +27,7 @@ const CountryRootGymsDetailPage = () => {
   return (
     <>
       <GymsNavigation countryGyms={countryGyms} />
-      <GymMap icon={icon} gyms={countryGyms} />
+      <MapComponent icon={icon} mapItems={countryGyms} />
       <Outlet />
     </>
   );

@@ -76,8 +76,25 @@ export default StarRating;
 
 export async function action({ params, request }: ActionFunctionArgs) {
   const gymId = params.gymId;
+  const caveId = params.caveId;
+  const routeId = params.routeId;
   const countryId = params.countryId?.toLowerCase();
-  const url = "http://localhost:8070/gyms/" + countryId + "/" + gymId;
+
+  let url: string = "";
+
+  if (gymId) {
+    url += "http://localhost:8070/gyms/" + countryId + "/" + gymId;
+  }
+
+  if (caveId) {
+    url += "http://localhost:8070/caves/" + countryId + "/" + caveId;
+  }
+
+  if (routeId) {
+    url += "http://localhost:8070/routes/" + countryId + "/" + routeId;
+  }
+
+  console.log(url, "url");
 
   const data = await request.formData();
 
@@ -113,5 +130,14 @@ export async function action({ params, request }: ActionFunctionArgs) {
   if (!response.ok) {
     throw json({ message: "Could not save event." }, { status: 500 });
   }
-  return redirect(`/gyms/${countryId}/${gymId}`);
+
+  if (gymId) {
+    return redirect(`/gyms/${countryId}/${gymId}`);
+  }
+  if (caveId) {
+    return redirect(`/caves/${countryId}/${caveId}`);
+  }
+  if (routeId) {
+    return redirect(`/routes/${countryId}/${routeId}`);
+  }
 }

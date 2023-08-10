@@ -1,7 +1,7 @@
 import { useRouteLoaderData } from "react-router-dom";
 
-import GymForm from "../components/GymForm";
-import { CountriesDetailPageRouteData } from "../models/interface-models";
+import GymForm from "../../components/GymForm";
+import { CountriesDetailPageRouteData } from "../../models/interface-models";
 
 function EditGymPage() {
   const { gym } = useRouteLoaderData(

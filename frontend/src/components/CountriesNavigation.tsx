@@ -1,8 +1,9 @@
-import { Link, useRouteLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useRouteLoaderData } from "react-router-dom";
 import {
   CountriesDetailPageRouteData,
   Country,
 } from "../models/interface-models";
+
 
 interface CountryListProps {
   countries: Country[];
@@ -16,6 +17,8 @@ interface Accumulator {
 }
 
 function CountriesNavigation({ countries }: CountryListProps) {
+  const { routes } = useLoaderData() as CountriesDetailPageRouteData;
+
   const sortedCountries = countries.sort((a, b) => (a.name > b.name ? 1 : -1));
 
   let groupCountries = sortedCountries.reduce(

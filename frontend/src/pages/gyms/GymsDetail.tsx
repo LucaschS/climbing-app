@@ -4,13 +4,13 @@ import {
   LoaderFunctionArgs,
   Outlet,
 } from "react-router-dom";
-import GymItem from "../components/GymItem";
-import { GymsDetailPageRouteData } from "../models/interface-models";
-import GymMap from "../components/GymMap";
-import StarRating from "../components/StarRating";
-import Apex from "../components/Apex";
-import Comment from "../components/CommentForm";
-import CommentsList from "../components/CommentsList";
+import GymItem from "../../components/GymItem";
+import { GymsDetailPageRouteData } from "../../models/interface-models";
+import MapComponent from "../../components/MapComponent";
+import StarRating from "../../components/StarRating";
+import Apex from "../../components/Apex";
+import Comment from "../../components/CommentForm";
+import CommentsList from "../../components/CommentsList";
 
 function GymsDetailPage() {
   const icon = "/climbing.png";
@@ -21,16 +21,16 @@ function GymsDetailPage() {
   // function onLogin(): void {
   //   console.log(token,"token");
   // }
- 
+
   return (
     <>
       <Outlet />
       <GymItem gym={gym} />
-     <StarRating rate={gym.rate} />
+      <StarRating rate={gym.rate} />
       {/* <Apex /> */}
-      <GymMap gym={gym} icon={icon} />
-      <Comment gym={gym} />
-      <CommentsList gym={gym} />
+      <MapComponent mapItem={gym} icon={icon} />
+      <Comment commentItem={gym} />
+      <CommentsList commentItem={gym} />
     </>
   );
 }

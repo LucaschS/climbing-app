@@ -12,7 +12,7 @@ function GymsNavigation({ countryGyms }: GymCountryItemProps) {
         <ul>
           {countryGyms.map((countryGym) => (
             <li key={countryGym.id}>
-              <NavLink to={`/gyms/${countryGym.cities[0]}/${countryGym.id}`}>
+              <NavLink to={`/gyms/${countryGym.country[0]}/${countryGym.id}`}>
                 {countryGym.tags.name} - {countryGym.tags.leisure}
               </NavLink>
             </li>

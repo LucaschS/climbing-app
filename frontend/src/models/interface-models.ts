@@ -20,7 +20,44 @@ export interface CountriesDetailPageRouteData {
   countryGyms: Gym[];
   gyms: Gym[];
   gym: Gym;
+  countryCaves: Cave[];
+  caves: Cave[];
+  cave: Cave;
+  routes: Route[];
+  route: Route;
+  countryRoutes: Route[];
   id: string;
+}
+
+export interface RoutesDetailPageRouteData {
+  route: Route;
+  routes: Route[];
+}
+
+export interface Route {
+  type: string;
+  id: number;
+  lat: number;
+  lon: number;
+  tags: {
+    ["access:conditional"]: string;
+    alt_name: string;
+    ["climbing:rock"]: string;
+    ["climbing:grade:saxon:min"]: string;
+    name: string;
+    ["name:de"]: string;
+    natural: string;
+    ref: string;
+    sport: string;
+    website: string;
+  };
+  country: string[];
+  rate: number[] | undefined;
+  comments: {
+    author: "string";
+    email: "string";
+    comment: "string";
+  }[];
 }
 
 export interface Country {
@@ -39,6 +76,48 @@ export interface Country {
 }
 
 export type Method = "put" | "post" | "patch" | "delete";
+
+export interface CavesDetailPageRouteData {
+  cave: Cave;
+  caves: Cave[];
+}
+
+export interface Cave {
+  type: string;
+  id: number;
+  lat: number;
+  lon: number;
+  tags: {
+    ["addr:city"]: string;
+    ["depth"]: string;
+    email: string;
+    fee: string;
+    heritage: string;
+    ["heritage:operator"]: string;
+    image: string;
+    length: string;
+    name: string;
+    ["name:de"]: string;
+    ["name:hu"]: string;
+    ["name:pl"]: string;
+    natural: string;
+    opening_hours: string;
+    phone: string;
+    ["ref:whc"]: string;
+    ["source:name"]: string;
+    tourism: string;
+    website: string;
+    wikidata: string;
+    wikipedia: string;
+  };
+  country: string[];
+  rate: number[] | undefined;
+  comments: {
+    author: "string";
+    email: "string";
+    comment: "string";
+  }[];
+}
 
 export interface GymsDetailPageRouteData {
   gym: Gym;
@@ -74,7 +153,7 @@ export interface Gym {
     sufrace: string;
   };
   type: string;
-  cities: string[];
+  country: string[];
   rate: number[] | undefined;
   comments: {
     author: "string";

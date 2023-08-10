@@ -15,7 +15,13 @@ const MainNavigation = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
+            <Link to="/routes">Rock Climbing</Link>
+          </li>
+          <li>
             <Link to="/gyms">Gyms</Link>
+          </li>
+          <li>
+            <Link to="/caves">Caves</Link>
           </li>
         </ul>
       </nav>

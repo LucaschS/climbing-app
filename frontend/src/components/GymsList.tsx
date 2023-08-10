@@ -19,7 +19,7 @@ function GymsList({ gyms }: GymListProps) {
               <div>
                 <h2>name: {gym.tags.name}</h2>
                 <h3>address: {gym.tags["addr:city"]}</h3>
-                <h4>city: {gym.cities}</h4>
+                <h4>city: {gym.country}</h4>
                 <time>lat: {gym.lat}</time>
                 <time>lon: {gym.lon}</time>
               </div>

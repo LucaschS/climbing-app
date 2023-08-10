@@ -13,30 +13,36 @@ import {
   CountriesDetailPageRouteData,
   Country,
   GymsDetailPageRouteData,
-} from "../models/interface-models";
-import CountriesList from "../components/CountriesList";
-import CountriesNavigation from "../components/CountriesNavigation";
-import GymMap from "../components/GymMap";
+} from "../../models/interface-models";
+import CountriesList from "../../components/CountriesList";
+import CountriesNavigation from "../../components/CountriesNavigation";
+import MapComponent from "../../components/MapComponent";
+import Finder from "../../components/RouteFinder";
 
 function GymsRootLayout() {
   const { gyms, countries } = useLoaderData() as CountriesDetailPageRouteData;
   const icon = "/climbing.png";
+
+  const [searchResults, setSearchResults] = useState<string | number>("");
+
+  console.log(searchResults, "filter");
 
   const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
   // const [countriesAbbreviation, setCountriesAbbreviation] = useState<string>([]);
 
   let countriesAbbr: string[] = [];
 
+  console.log(countriesAbbr, "countriesAbbr");
+
   gyms.forEach((abbr) => {
-    if (!countriesAbbr.includes(abbr.cities[0])) {
-      countriesAbbr.push(abbr.cities[0]);
+    if (!countriesAbbr.includes(abbr.country[0])) {
+      countriesAbbr.push(abbr.country[0]);
     }
   });
 
   useEffect(() => {
     countriesAbbr.map((x) => {
       let y = countries.filter((y) => x.includes(y["alpha-3"]));
-
       setFilteredCountries((prevState) => [...prevState, ...y]);
     });
   }, []);
@@ -44,7 +50,7 @@ function GymsRootLayout() {
   return (
     <>
       <CountriesNavigation countries={filteredCountries} />
-      <GymMap icon={icon} gyms={gyms} />
+      <MapComponent icon={icon} mapItems={gyms} />
       <Outlet />
     </>
   );

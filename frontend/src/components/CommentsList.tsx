@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 
-import { Gym } from "../models/interface-models";
+import { Gym, Cave, Route } from "../models/interface-models";
 
 interface GymListProps {
-  gym: Gym;
+  commentItem: Gym | Cave | Route;
 }
 
-function CommentsList({ gym }: GymListProps) {
-
+function CommentsList({ commentItem }: GymListProps) {
   return (
     <div>
       <h1>Comments</h1>
       <ul>
-        {gym.comments &&
-          gym.comments.map((x) => (
+        {commentItem.comments &&
+          commentItem.comments.map((x) => (
             <>
               <li>{x.author}</li>
               <li>{x.email}</li>

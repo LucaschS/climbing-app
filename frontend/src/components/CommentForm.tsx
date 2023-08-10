@@ -1,12 +1,18 @@
-import { json, useLoaderData, useRouteLoaderData } from "react-router-dom";
+import {
+  json,
+  useLoaderData,
+  useParams,
+  useRouteLoaderData,
+  useSearchParams,
+} from "react-router-dom";
 
 import { useState, useRef, ReactNode } from "react";
-import { Gym } from "../models/interface-models";
+import { Gym, Cave, Route } from "../models/interface-models";
 import { useContext } from "react";
 import ModalContext from "../store/ModalContext";
 
 interface CommentProps {
-  gym: Gym;
+  commentItem: Gym | Cave | Route;
   // onLogin: () => void;
 }
 
@@ -16,9 +22,10 @@ interface CommentState {
   comment: string;
 }
 
-const CommentAddForm = ({ gym }: CommentProps) => {
+const CommentAddForm = ({ commentItem }: CommentProps) => {
   const ctx = useContext(ModalContext);
   const token = useRouteLoaderData("root") as string;
+  const { countryId, gymId, routeId, caveId } = useParams();
 
   // const token = useLoaderData();
 
@@ -54,10 +61,19 @@ const CommentAddForm = ({ gym }: CommentProps) => {
 
     if (!commentState.author || !commentState.comment) return;
 
-    const countryId = gym.cities[0].toLowerCase();
-    const gymId = gym.id;
-    const url = "http://localhost:8070/gyms/" + countryId + "/" + gymId;
+    let url: string = "";
 
+    if (gymId) {
+      url += "http://localhost:8070/gyms/" + countryId + "/" + gymId;
+    }
+
+    if (caveId) {
+      url += "http://localhost:8070/caves/" + countryId + "/" + caveId;
+    }
+
+    if (routeId) {
+      url += "http://localhost:8070/routes/" + countryId + "/" + routeId;
+    }
     // const data = await request.formData();
 
     const formData = {

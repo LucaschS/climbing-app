@@ -32,6 +32,7 @@
     "react-leaflet": "^4.2.1",
     "react-leaflet-cluster": "^2.1.0",
     "react-leaflet-markercluster": "^3.0.0-rc1",
+    "react-multi-search-select": "^1.5.0",
     "react-scripts": "5.0.1",
     "sort-by": "^1.2.0",
     "typescript": "^4.9.5",
