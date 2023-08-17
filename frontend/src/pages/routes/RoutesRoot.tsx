@@ -17,14 +17,20 @@ import {
 import CountriesList from "../../components/CountriesList";
 import CountriesNavigation from "../../components/CountriesNavigation";
 import MapComponent from "../../components/MapComponent";
-import Finder from "../../components/RouteFinder";
+import RoutesFinder from "../../components/RouteFinder";
 import { Route } from "../../models/interface-models";
+import RoutesNavigationAfterFilter from "../../components/RoutesNavigationAfterFilter";
 
 function RoutesRootLayout() {
   const { routes, countries } = useLoaderData() as CountriesDetailPageRouteData;
   const icon = "/climbing.png";
 
   const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
+  const [filteredRoutes, setFilteredRoutes] = useState<Route[] | undefined>();
+
+  console.log(filteredCountries, "filteredCountries");
+
+  console.log(filteredRoutes, "filteredRoutes");
 
   let countriesAbbr: string[] = [];
 
@@ -41,11 +47,13 @@ function RoutesRootLayout() {
     });
   }, []);
 
-
   return (
     <>
-      <Finder  />
-      <CountriesNavigation countries={filteredCountries} />
+      <RoutesFinder setFilteredRoutes={setFilteredRoutes} />
+      {filteredCountries && <CountriesNavigation countries={filteredCountries} />}
+      {filteredRoutes && (
+        <RoutesNavigationAfterFilter filteredRoutes={filteredRoutes} />
+      )}
       <MapComponent icon={icon} mapItems={routes} />
       <Outlet />
     </>

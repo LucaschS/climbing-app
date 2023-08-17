@@ -2,134 +2,103 @@ import React, { useState, useRef, useEffect, useImperativeHandle } from "react";
 import { useLoaderData } from "react-router-dom";
 import {
   CountriesDetailPageRouteData,
-  Country,
-  GymsDetailPageRouteData,
+  Route,
 } from "../models/interface-models";
 
-interface CollectedTrueKeys {
-  rockType: string[];
-  rate: string[];
+interface RoutesFinderProps {
+  setFilteredRoutes: (Routes: Route[]) => void;
 }
 
-interface State {
-  searchTerm?: string;
-  passingTags?:
-    | {
-        [key: string]: any;
-        search?:
-          | {
-              inputTerm?: string;
-            }
-          | undefined;
-        rate?:
-          | {
-              [key: number]: boolean;
-              1: boolean;
-              2: boolean;
-              3: boolean;
-              4: boolean;
-              5: boolean;
-              6: boolean;
-              7: boolean;
-              8: boolean;
-              9: boolean;
-              10: boolean;
-            }
-          | undefined;
-        rockType?:
-          | {
-              [key: string]: boolean;
-              sandstone: boolean;
-              limestone: boolean;
-              granithe: boolean;
-            }
-          | undefined;
-      }
-    | undefined;
-}
 
-const defaultState = {};
+const RoutesFinder = ({ setFilteredRoutes }: RoutesFinderProps) => {
+  const { routes } = useLoaderData() as CountriesDetailPageRouteData;
 
-const Finder = () => {
-  const { gyms, routes, caves, countries } =
-    useLoaderData() as CountriesDetailPageRouteData;
+  const [state, setState] = useState<any>({
+    name: "",
+    rockType: "",
+    country: "",
+    rate: "",
+  });
 
-  const [filteredRoutes, setFilteredRoutes] = useState(defaultState);
+  // const [rockType, setRockType] = useState<string | undefined>();
+  // const [country, setCountry] = useState<string | undefined>();
+  // const [name, setName] = useState<string | undefined>();
+  // const [rate, setRate] = useState<string | undefined>();
 
-  const [rockType, setRockType] = useState<any>();
-  const [country, setCountry] = useState<any>();
-  const [name, setName] = useState<any>();
-  console.log(country, "country");
-  console.log(rockType, "rockType");
-  console.log(name, "name");
-  console.log(filteredRoutes, "filteredRoutes");
-
+  console.log(state, "state");
+  // console.log(rate, "rate");
   const rockCategory = Array.from(
     new Set(routes.map((route) => route.tags["climbing:rock"]))
   );
 
+  // const type = Array.from(new Set(routes.map((route) => route.tags.alt_name)));
+  // console.log(type, "type");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log(e.target, "e");
+    // setState({
+    //   name: e.target[0].value,
+    //   rockType: e.target[1].value,
+    //   country: e.target[2].value,
+    //   rate: e.target[3].value,
+    // });
+
+    console.log(e.currentTarget.name, "name");
+  };
+
   useEffect(() => {
     setFilteredRoutes(
       routes.filter((route) => {
-        // console.log(route.tags.name);
+        const { rockType, country, name, rate } = state;
         return (
           (!rockType || rockType === route.tags["climbing:rock"]) &&
           (!country || country === route.country[0]) &&
           (!name ||
             (route.tags.name &&
-              name.toLowerCase() === route.tags.name.toLowerCase()))
+              route.tags.name.toLowerCase().includes(name.toLowerCase())))
         );
       })
     );
-  }, [country, rockType, name]);
+  }, [state.country, state.rockType, state.name]);
 
-  const clearFilters = () => {
-    setCountry("");
-    setRockType("");
-    setName("");
+  const clearFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setState({
+      name: "",
+      rockType: "",
+      country: "",
+      rate: "",
+    });
+
+    // setCountry("");
+    // setRockType("");
+    // setName("");
   };
 
   return (
     <>
       <h1>Gym Finder</h1>
-      <form>
-        <input
-          name="name"
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        ></input>
+      <form onSubmit={handleSubmit}>
+        <input name="name" type="text" id="name"></input>
         <label htmlFor="rockType"></label>
-        <select
-          name="rockType"
-          id="rockType"
-          value={rockType}
-          onChange={(e) => setRockType(e.target.value)}
-        >
-          <option value="limestone">Limestone</option>
-          <option value="sandstone">Sandstone</option>
-          <option value="granithe">Granite</option>
+        <select name="rockType" id="rockType">
+          <option value="">Any</option>
+          {rockCategory.map((category) => (
+            <option value={category}>{category}</option>
+          ))}
         </select>
 
         <label htmlFor="country"></label>
-        <select
-          name="country"
-          id="country"
-          value={rockType}
-          onChange={(e) => setCountry(e.target.value)}
-        >
+        <select name="country" id="country" value={state.country}>
+          <option value="">Any</option>
           <option value="POL">Poland</option>
           <option value="ITA">Italy</option>
           <option value="DEU">Deu</option>
         </select>
-        {/* <label htmlFor="rate"></label>
-        <select
-          name="rate"
-          id="rate"
-          value={rate}
-          onChange={(e) => setRate(e.target.value)}
-        >
+        <label htmlFor="rate"></label>
+        <select name="rate" id="rate">
           <option value="1">1 of 10 stars</option>
           <option value="2">2 of 10 stars</option>
           <option value="3">3 of 10 stars</option>
@@ -140,13 +109,12 @@ const Finder = () => {
           <option value="8">8 of 10 stars</option>
           <option value="9">9 of 10 stars</option>
           <option value="10">10 of 10 stars</option>
-        </select> */}
+        </select>
         <button onClick={clearFilters}>Clear</button>
-        {/* <button onClick={cancelSearchTag}>Cancel</button> */}
+        <button>Search</button>
       </form>
-      {/* <div>{searchProducts()}</div> */}
     </>
   );
 };
 
-export default Finder;
+export default RoutesFinder;
